@@ -49,9 +49,11 @@ class Widget:
 
     def show(self) -> None:
         """Show to the draw surface the widget"""
-        to_draw: Surface = Surface( (0,0), SRCALPHA )
+        to_draw: Surface = Surface( (self.width,self.height), SRCALPHA )
         to_draw.fill(self.color)
         self.draw_surface.blit(to_draw, (self.x,self.y))
+        for child in self.childs.values():
+            child.show()
 
     @classmethod
     def from_dict(cls: Type[T], id:int, parent:None|Widget, draw_surface:Surface, values:dict) -> T:
