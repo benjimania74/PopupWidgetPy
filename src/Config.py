@@ -1,4 +1,3 @@
-from sys import path
 import json
 
 from Widget import Widget
@@ -14,10 +13,9 @@ class Config:
 
     panels: list[Widget] = []
 
-    def __init__(self, screen_size: tuple[int,int]) -> None:
-        CONFIG_NAME = path[0] + "/../config.json"
+    def __init__(self, config_path:str, screen_size:tuple[int,int]) -> None:
         try:
-            config_file = open(CONFIG_NAME, "r")
+            config_file = open(config_path, "r")
             config = json.loads(config_file.read())
 
             def get_int(att:str) -> int:
