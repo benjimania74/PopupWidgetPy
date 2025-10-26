@@ -1,4 +1,6 @@
 from __future__ import annotations
+from typing import TypeVar, Type
+T = TypeVar("T", bound="Widget")
 
 from pygame import Surface, Color, SRCALPHA
 
@@ -52,7 +54,7 @@ class Widget:
         self.draw_surface.blit(to_draw, (self.x,self.y))
 
     @classmethod
-    def from_dict(cls, id:int, parent:None|Widget, draw_surface:Surface, values:dict) -> Widget:
+    def from_dict(cls: Type[T], id:int, parent:None|Widget, draw_surface:Surface, values:dict) -> T:
         """Generate a Widget from a JSON data (as dict)"""
         x:int = values.get("x", 0) + parent.x if parent != None else 0
         y:int = values.get("y", 0) + parent.y if parent != None else 0

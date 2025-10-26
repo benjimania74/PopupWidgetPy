@@ -1,6 +1,7 @@
 import json
 
-from Widget import Widget
+from pygame import Surface
+from widgets.PanelWidget import PanelWidget
 
 NAME: str = "PopupWidgetPy"
 
@@ -11,7 +12,9 @@ class Config:
     y:int
     start_panel:str
 
-    panels: list[Widget] = []
+    panels: dict[str, PanelWidget] = {}
+
+    panels_config: dict = {}
 
     def __init__(self, config_path:str, screen_size:tuple[int,int]) -> None:
         try:
@@ -27,5 +30,14 @@ class Config:
             self.y = get_int("y")
 
             self.start_panel = config.get("start_panel", "")
+
+            self.panels_config = config.get("panels", {})
         except:
             raise Exception("Config file not found or misdefined")
+    
+    def load_panels(self, default_surface:Surface) -> None:
+        """Load panels from the config"""
+        id:int = 0
+        for panel_config in self.panels_config.items():
+            self.panels[panel_config[0]] = PanelWidget.from_dict(id, None, default_surface, panel_config[1])
+            id += 1
