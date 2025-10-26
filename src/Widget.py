@@ -34,7 +34,7 @@ class Widget:
             if event_type.value == None: continue
             method_name: str = "on_" + str(event_type.value)
             if hasattr(self, method_name): continue                               # if a method (or an attribute) already exists with the same name
-            def on_event(self: Widget, event: Event):                             # default event method
+            def on_event(event: Event):                                           # default event method
                 return True
             self.__setattr__(method_name, on_event)                               # add the method to the object
         self.on_event( Event( EventType.INIT_EVENT, {"id": id}) )                 # on init event call
