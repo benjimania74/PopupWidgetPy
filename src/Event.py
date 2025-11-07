@@ -1,17 +1,19 @@
 from enum import Enum
-from typing import Union, Sequence
+from typing import Union, Sequence, final
 
 valueType = Union[int,float,str]
 dataType = Union[valueType, dict[str,valueType], Sequence[valueType]]
 
 EventInfo = dict[str,dataType]
 
+@final
 class EventType(Enum):
     NONE = None
     INIT_EVENT = "init"
     HOVER_EVENT = "hover"
     CLICK_EVENT = "click"
 
+@final
 class Event:
     event_type: EventType
     event_info: EventInfo
