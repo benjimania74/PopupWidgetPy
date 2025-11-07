@@ -22,8 +22,8 @@ class Widget:
 
     def __init__(self, id:int, x:int, y:int, width:int, height:int, color: Color, parent:None|Widget, draw_surface: Surface) -> None:
         self.id = id
-        self.x = x
-        self.y = y
+        self.x = x if x != -1 else draw_surface.get_width() // 2 - width // 2     # if x = -1 -> auto center horizontaly
+        self.y = y if y != -1 else draw_surface.get_height() // 2 - height // 2   # if y = -1 -> auto center verticaly
         self.width = width
         self.height = height
         self.color = color
