@@ -7,11 +7,14 @@ class PanelWidget(ContainerWidget):
 
     @classmethod
     def from_dict(cls: type[T], id: int, parent: None | Widget, draw_surface: Surface, values: dict) -> T:
-        x:int = values.get("x", -1)
-        y:int = values.get("y", -1)
-        width:int = values.get("width",0)
-        height:int = values.get("height",0)
-        color: Color = Color( values.get("background", "#FFFFFF00") )
-        panelWidget = cls(id, x, y, width, height, color, parent, draw_surface)
-        cls.generate_children( panelWidget, values.get("content", []) )
+        get_args: list[Args_Info_Type] = [
+            ("x", -1),
+            ("y", -1),
+            ("width", -1),
+            ("height", -1),
+            ("background", "#FFFFFF00", Color),
+        ]
+        args = cls.get_args(get_args, values)
+        panelWidget = cls(id, *args, parent, draw_surface)
+        panelWidget.generate_children( values.get("content", []) )
         return panelWidget
