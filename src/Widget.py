@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import TypeVar, Type, final, Any, Optional, Union
+from typing import TypeVar, Type, final, Any, Union
 from abc import ABC, abstractmethod
 from importlib import import_module
 
