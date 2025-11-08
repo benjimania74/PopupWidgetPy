@@ -27,10 +27,13 @@ class Widget(ABC):
 
     def __init__(self, id:int, x:int, y:int, width:int, height:int, background_color: Color, parent:None|Widget, draw_surface: Surface) -> None:
         self.id = id
-        self.x = x if -1 < x else draw_surface.get_width() // 2 - width // 2      # if x = -1 -> auto center horizontaly
-        self.y = y if -1 < y else draw_surface.get_height() // 2 - height // 2    # if y = -1 -> auto center verticaly
+
         self.width = width = width if -1 < width else parent.width if parent != None else 0
         self.height = height = height if -1 < height else parent.height if parent != None else 0
+
+        self.x = x if -1 < x else draw_surface.get_width() // 2 - width // 2      # if x = -1 -> auto center horizontaly
+        self.y = y if -1 < y else draw_surface.get_height() // 2 - height // 2    # if y = -1 -> auto center verticaly
+        
         self.background_color = background_color
         self.parent = parent
         self.draw_surface = draw_surface
